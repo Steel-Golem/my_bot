@@ -8,5 +8,5 @@ Execute below lines at the project root
 git pull
 colcon build
 source install/setup.bash
-ros2 launch rover_sim rsp.launch.py
+ros2 launch my_bot rsp.launch.py
 ```
