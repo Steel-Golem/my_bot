@@ -77,22 +77,112 @@ then make sure that `empty.sdf` file is being referenced in your launch configur
 
 ---
 
-### 🧹 Saving Your Container Progress
 
-After installing or editing anything inside Docker, **commit** your container so you don’t lose your setup:
+
+### 🐋 Docker Usage & Persistence Guide
+
+Your ROS 2 simulator runs inside a Docker container to ensure everyone has the same dependencies and setup.
+Here’s how to **work safely, save progress, and resume later** without creating unnecessary new images.
+
+---
+
+#### 💾 1️⃣ Saving Progress (When You’ve Made Changes)
+
+If you’ve installed packages, edited environment variables, or modified files *inside* Docker (not just your mounted `my_bot` folder),
+save those changes back into your base image so you can reopen the same setup later:
 
 ```bash
-docker ps -a        # find container ID
-docker commit <container_id> ros2_dev_env:stable
+docker commit ros2_dev_env ros2_dev_env:stable
 ```
 
-Next time, start directly with:
+✅ This updates the existing `ros2_dev_env:stable` image **in place** — it does not duplicate another 10 GB image layer.
+
+You can confirm your save worked with:
 
 ```bash
-docker run -it --name ros2_dev_env --network host ros2_dev_env:stable
+docker images
 ```
 
-This ensures your workspace, packages, and environment variables persist.
+If the **“CREATED”** timestamp updates, your checkpoint is saved.
+
+---
+
+#### 🧱 2️⃣ Resuming Work Later
+
+When you exit or stop your container, your setup is *not deleted* — it’s paused.
+You can reopen it instantly with:
+
+```bash
+docker start -ai ros2_dev_env
+```
+
+If the container was removed or you need a clean slate, recreate it with:
+
+```bash
+docker run -it \
+  --name ros2_dev_env \
+  --network host \
+  -v ~/Desktop/my_bot:/home/ubuntu/Desktop/my_bot \
+  ros2_dev_env:stable
+```
+
+> The `-v` flag ensures your local project files stay synced on your host system (`~/Desktop/my_bot`).
+> Anything you edit in that folder will persist even if you delete or rebuild the container.
+
+---
+
+#### 🧰 3️⃣ Common Workflow Example
+
+Typical daily flow:
+
+```bash
+# On host (Mac or Linux)
+docker start -ai ros2_dev_env
+
+# Inside container
+cd ~/Desktop/my_bot
+git pull
+colcon build
+source install/setup.bash
+ros2 launch my_bot rsp.launch.py
+```
+
+If you installed new dependencies (e.g., `apt install` inside Docker):
+
+```bash
+exit   # leave container
+docker commit ros2_dev_env ros2_dev_env:stable
+```
+
+Then, next session, you can just run `docker start -ai ros2_dev_env` again — all changes preserved.
+
+---
+
+#### 🧼 4️⃣ Cleaning Up Space
+
+To remove stopped containers or old dangling images safely:
+
+```bash
+docker container prune
+docker image prune -a
+```
+
+> ⚠️ Make sure your latest `ros2_dev_env:stable` image appears in `docker images` before pruning.
+
+---
+
+#### ✅ Quick Reference
+
+| Action           | Command                                                                                                                 | Notes                     |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------- |
+| Launch container | `docker run -it --name ros2_dev_env --network host -v ~/Desktop/my_bot:/home/ubuntu/Desktop/my_bot ros2_dev_env:stable` | First time setup          |
+| Resume container | `docker start -ai ros2_dev_env`                                                                                         | Continue existing session |
+| Save changes     | `docker commit ros2_dev_env ros2_dev_env:stable`                                                                        | Save environment updates  |
+| List images      | `docker images`                                                                                                         | Check save time           |
+| Free space       | `docker system prune -a`                                                                                                | Clean up old layers       |
+
+
+---
 
 ---
 
