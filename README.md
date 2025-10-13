@@ -1,5 +1,4 @@
-## Robot Package Template
-
+## Command lines to get started on VM (http://localhost:6080/)
 git pull
 colcon build
 source install/setup.bash
