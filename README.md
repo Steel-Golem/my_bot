@@ -16,6 +16,10 @@ colcon build --symlink-install
 source install/setup.bash
 ros2 launch my_bot launch_sim.launch.py
 ```
+then run the following in a seperate window
+```bash
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
+```
 
 ---
 
