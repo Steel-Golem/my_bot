@@ -29,14 +29,13 @@ def generate_launch_description():
         parameters=[params]
     )
 
-    gazebo_pkg = get_package_share_directory('gazebo_ros')
+    gazebo_pkg = get_package_share_directory('ros_gz_sim')
     gazebo_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(gazebo_pkg, 'launch', 'gazebo.launch.py')
-        ),
-        launch_arguments={'world': os.path.join(pkg_path, 'worlds', 'empty.world')}.items(),
-    )
-
+    PythonLaunchDescriptionSource(
+        os.path.join(gazebo_pkg, 'launch', 'gz_sim.launch.py')
+    ),
+    launch_arguments={'gz_args': '-r -v 4 empty.sdf'}.items(),
+)
 
     # Launch!
     return LaunchDescription([
