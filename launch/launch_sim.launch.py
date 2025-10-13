@@ -41,6 +41,13 @@ def generate_launch_description():
                                    '-z', '0.1'],
                         output='screen')
 
+    bridge = Node(package='ros_gz_bridge', executable='parameter_bridge',
+                    arguments=[
+                        '/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist',
+                        '/odom@nav_msgs/msg/Odometry@gz.msgs.Odometry',
+                        '/clock@rosgraph_msgs/msg/Clock@gz.msgs.Clock'
+                    ],
+                    output='screen')
 
 
     # Launch them all!
@@ -48,4 +55,5 @@ def generate_launch_description():
         rsp,
         world_arg,
         spawn_entity,
+        bridge,
     ])
