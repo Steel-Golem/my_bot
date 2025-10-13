@@ -1,49 +1,53 @@
-import os
-
-from ament_index_python.packages import get_package_share_directory
-
 from launch import LaunchDescription
-from launch.substitutions import LaunchConfiguration
-from launch.actions import DeclareLaunchArgument
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
-
+from ament_index_python.packages import get_package_share_directory
+from launch.substitutions import LaunchConfiguration
+import os
 import xacro
 
 
 def generate_launch_description():
-
-    # Check if we're told to use sim time
+    # Launch argument to toggle simulation time
     use_sim_time = LaunchConfiguration('use_sim_time')
 
-    # Process the URDF file
+    # Locate and process the robot description (URDF/Xacro)
     pkg_path = os.path.join(get_package_share_directory('my_bot'))
-    xacro_file = os.path.join(pkg_path,'description','robot.urdf.xacro')
+    xacro_file = os.path.join(pkg_path, 'description', 'robot.urdf.xacro')
     robot_description_config = xacro.process_file(xacro_file)
-    
-    # Create a robot_state_publisher node
-    params = {'robot_description': robot_description_config.toxml(), 'use_sim_time': use_sim_time}
+
+    # Parameters for the robot_state_publisher
+    params = {
+        'robot_description': robot_description_config.toxml(),
+        'use_sim_time': use_sim_time
+    }
+
     node_robot_state_publisher = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
-        output='screen',
-        parameters=[params]
+        parameters=[params],
+        output='screen'
     )
 
-    gazebo_pkg = get_package_share_directory('ros_gz_sim')
-    gazebo_launch = IncludeLaunchDescription(
-    PythonLaunchDescriptionSource(
-        os.path.join(gazebo_pkg, 'launch', 'gz_sim.launch.py')
-    ),
-    launch_arguments={'gz_args': '-r -v 4 empty.sdf'}.items(),
-)
+    # Include Ignition Gazebo (ros_gz_sim) instead of classic gazebo_ros
+    gz_pkg = get_package_share_directory('ros_gz_sim')
+    gz_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(gz_pkg, 'launch', 'gz_sim.launch.py')
+        ),
+        launch_arguments={
+            'gz_args': os.path.join(pkg_path, 'worlds', 'empty.world')
+        }.items(),
+    )
 
-    # Launch!
+    # Return the final launch description
     return LaunchDescription([
         DeclareLaunchArgument(
             'use_sim_time',
-            default_value='false',
-            description='Use sim time if true'),
-
+            default_value='true',
+            description='Use simulation (Gazebo) clock if true'
+        ),
         node_robot_state_publisher,
-        gazebo_launch
+        gz_launch
     ])
