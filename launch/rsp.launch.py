@@ -29,6 +29,14 @@ def generate_launch_description():
         parameters=[params]
     )
 
+    gazebo_pkg = get_package_share_directory('gazebo_ros')
+    gazebo_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(gazebo_pkg, 'launch', 'gazebo.launch.py')
+        ),
+        launch_arguments={'world': os.path.join(pkg_path, 'worlds', 'empty.world')}.items(),
+    )
+
 
     # Launch!
     return LaunchDescription([
@@ -38,4 +46,5 @@ def generate_launch_description():
             description='Use sim time if true'),
 
         node_robot_state_publisher
+        gazebo_launch,
     ])
