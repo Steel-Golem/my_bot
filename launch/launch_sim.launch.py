@@ -1,4 +1,5 @@
 import os
+import xacro
 
 from ament_index_python.packages import get_package_share_directory
 
@@ -7,8 +8,8 @@ from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
-
 from launch_ros.actions import Node
+from launch_ros.parameter_descriptions import ParameterValue
 
 
 
@@ -50,6 +51,12 @@ def generate_launch_description():
                     output='screen')
 
 
+    xacro_file = os.path.join(
+                    get_package_share_directory('my_bot'),
+                    'description',
+                    'my_bot.urdf.xacro'
+                    )
+    robot_description_config = xacro.process_file(xacro_file).toxml()
 
     controller_manager_node = Node(package='controller_manager', executable='ros2_control_node', 
                         parameters=[
@@ -60,6 +67,20 @@ def generate_launch_description():
                             'my_controllers.yaml')
                         ], 
                         output='screen' )
+    
+    load_joint_state_broadcaster = Node(
+        package='controller_manager',
+        executable='spawner.py',
+        arguments=['joint_state_broadcaster', '--controller-manager', '/controller_manager'],
+        output='screen'
+    )
+
+    load_diff_drive_controller = Node(
+        package='controller_manager',
+        executable='spawner.py',
+        arguments=['diff_drive_controller', '--controller-manager', '/controller_manager'],
+        output='screen'
+    )
 
     # Launch them all!
     return LaunchDescription([
@@ -68,4 +89,6 @@ def generate_launch_description():
         spawn_entity,
         bridge,
         controller_manager_node,
+        TimerAction(period=2.0, actions=[load_joint_state_broadcaster]),
+        TimerAction(period=2.5, actions=[load_diff_drive_controller]),
     ])
