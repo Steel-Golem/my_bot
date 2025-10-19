@@ -50,10 +50,22 @@ def generate_launch_description():
                     output='screen')
 
 
+
+    controller_manager_node = Node(package='controller_manager', executable='ros2_control_node',
+                    parameters=[{
+                                'robot_description': '<robot urdf/xacro>',
+                                'use_sim_time': True
+                    }],
+                    output='screen'
+)
+
+
+
     # Launch them all!
     return LaunchDescription([
         rsp,
         world_arg,
         spawn_entity,
         bridge,
+        controller_manager_node,
     ])
