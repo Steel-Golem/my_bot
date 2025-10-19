@@ -51,15 +51,18 @@ def generate_launch_description():
 
 
 
+    controllers_file = os.path.join(
+        get_package_share_directory('my_bot'),
+        'config',
+        'my_controllers.yaml'
+    )
+
     controller_manager_node = Node(package='controller_manager', executable='ros2_control_node',
-                    parameters=[{
-                                'robot_description': '<robot urdf/xacro>',
-                                'use_sim_time': True
-                    }],
-                    output='screen'
-)
-
-
+                    parameters=[
+                        {'robot_description': robot_description_config},
+                        controllers_file
+                    ],
+                    output='screen')
 
     # Launch them all!
     return LaunchDescription([
