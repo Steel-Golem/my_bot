@@ -34,6 +34,7 @@ endif()
 
 install(
   DIRECTORY config description launch worlds
+  DIRECTORY description
   DESTINATION share/${PROJECT_NAME}
 )
 
