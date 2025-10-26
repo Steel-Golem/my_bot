@@ -11,6 +11,9 @@ from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
 
+from launch.actions import SetEnvironmentVariable
+
+SetEnvironmentVariable('GAZEBO_PLUGIN_PATH', '/opt/ros/humble/lib')
 
 
 def generate_launch_description():
