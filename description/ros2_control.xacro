@@ -3,7 +3,7 @@
     
     <ros2_control name="GazeboSystem" type="system">
     <hardware>
-      <plugin>fake_components/GenericSystem</plugin>
+      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
     </hardware>
 
     <!-- Left wheel joint -->

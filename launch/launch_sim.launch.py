@@ -88,6 +88,6 @@ def generate_launch_description():
     spawn_entity,
     bridge,
     controller_manager_node,
-    TimerAction(period=5.0, actions=[load_joint_state_broadcaster]),
-    TimerAction(period=6.0, actions=[load_diff_drive_controller]),
+    TimerAction(period=3.0, actions=[load_joint_state_broadcaster]),
+    TimerAction(period=4.0, actions=[load_diff_drive_controller]),
     ])
