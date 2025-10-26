@@ -3,7 +3,7 @@
     
     <ros2_control name="GazeboSystem" type="system">
     <hardware>
-      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+      <plugin>gazebo_ros2_control/GazeboSimSystem</plugin>
     </hardware>
 
     <!-- Left wheel joint -->
@@ -12,8 +12,8 @@
         <param name="min">-10</param>
         <param name="max">10</param>
       </command_interface>
-      <state_interface name="position"/>
       <state_interface name="velocity"/>
+      <state_interface name="position"/>
     </joint>
 
     <!-- Right wheel joint -->
@@ -22,31 +22,16 @@
         <param name="min">-10</param>
         <param name="max">10</param>
       </command_interface>
-      <state_interface name="position"/>
       <state_interface name="velocity"/>
+      <state_interface name="position"/>
     </joint>
   </ros2_control>
 
-  <!-- ====================================== -->
-  <!-- Gazebo Plugins -->
-  <!-- ====================================== -->
   <gazebo>
-    <!-- Gazebo ros2_control plugin -->
-    <plugin name="ros2_control" filename="libgz_ros2_control-system.so">
-      <parameters>
-      </parameters>
+    <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+        <paramater>
+          $(find my_bot)/config/my_controllers.yaml
+        </paramater>
     </plugin>
-
-    
-   <!-- <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
-      <render_engine>ogre2</render_engine>
-    </plugin> -->
-
-    <!-- User commands (optional, only if you want interactive commands) -->
-    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
-
-    <!-- Scene broadcaster -->
-    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
   </gazebo>
-    
 </robot>
