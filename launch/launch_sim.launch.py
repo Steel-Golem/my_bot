@@ -58,16 +58,16 @@ def generate_launch_description():
                     )
     robot_description_config = xacro.process_file(xacro_file).toxml()
 
-    controller_manager_node = Node(package='controller_manager', executable='ros2_control_node', 
-                        arguments=[
-                            'robot_description'
-                        ],
-                        parameters=[
-                            os.path.join(get_package_share_directory('my_bot'), 
-                            'config',
-                            'my_controllers.yaml')
-                        ], 
-                        output='screen' )
+    
+    controller_manager_node = Node(
+        package='controller_manager', 
+        executable='ros2_control_node',
+        parameters=[
+                    {'robot_description': robot_description_config},
+                    os.path.join(get_package_share_directory('my_bot'), 'config', 'my_controllers.yaml')
+        ],
+        output='screen'
+    )
     
     load_joint_state_broadcaster = Node(
         package='controller_manager',
