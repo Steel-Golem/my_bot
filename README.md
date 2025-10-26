@@ -11,6 +11,11 @@ For setup help, you can also refer to the **BU Mars Rover Club Discord** (see pi
 Run these inside the Docker environment (usually accessible at [http://localhost:6080/](http://localhost:6080/)):
 
 ```bash
+sudo apt update
+sudo apt install ros-humble-ros2-control ros-humble-ros2-controllers
+sudo apt install ros-humble-gz-ros2-control
+
+
 git pull
 colcon build --symlink-install
 source install/setup.bash
