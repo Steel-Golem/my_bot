@@ -89,14 +89,14 @@ def generate_launch_description():
     # Launch them all!
     return LaunchDescription([
     SetEnvironmentVariable(
-        name='GAZEBO_PLUGIN_PATH',
-        value='/opt/ros/humble/lib'
+        'GAZEBO_PLUGIN_PATH',
+        '/opt/ros/humble/lib'
     ),
     rsp,
     world_arg,
     spawn_entity,
     bridge,
     controller_manager_node,
-    TimerAction(period=2.0, actions=[load_joint_state_broadcaster]),
-    TimerAction(period=2.5, actions=[load_diff_drive_controller]),
+    TimerAction(period=5.0, actions=[load_joint_state_broadcaster]),
+    TimerAction(period=6.0, actions=[load_diff_drive_controller]),
     ])
