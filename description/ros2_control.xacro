@@ -3,7 +3,7 @@
     
     <ros2_control name="GazeboSystem" type="system">
     <hardware>
-      <plugin>gazebo_ros2_control/GazeboSimSystem</plugin>
+      <plugin>ros2_control_demo_hardware/ActuatorSystem</plugin>
     </hardware>
 
     <!-- Left wheel joint -->
