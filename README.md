@@ -15,8 +15,6 @@ sudo apt update
 sudo apt install ros-humble-ros2-control ros-humble-ros2-controllers
 sudo apt install ros-humble-gz-ros2-control
 
-
-git pull
 colcon build --symlink-install
 source install/setup.bash
 ros2 launch my_bot launch_sim.launch.py
