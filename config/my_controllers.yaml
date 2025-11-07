@@ -26,7 +26,7 @@ diff_drive_controller:
     wheel_separation: 0.35
     wheel_radius: 0.05
     
-     linear:
+    linear:
       x:
         has_velocity_limits: true
         max_velocity: 0.3
