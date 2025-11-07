@@ -21,12 +21,12 @@
     </joint>
   </ros2_control>
 
-  <!--
+  
   <gazebo>
     <plugin name="gz_ros2_control::GazeboSimROS2ControlPlugin" filename="gz_ros2_control-system">
       <parameters>$(find my_bot)/config/my_controllers.yaml</parameters>
     </plugin>
   </gazebo>
-  -->
+  
 
 </robot>
