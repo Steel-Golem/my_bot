@@ -30,7 +30,7 @@
   </gazebo> -->
   
   <gazebo>
-    <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so"/>
+    <plugin name="gazebo_ros2_control" filename="libgz_ros2_control.so"/>
   </gazebo>
 
 
