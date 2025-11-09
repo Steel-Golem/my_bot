@@ -81,6 +81,20 @@ def generate_launch_description():
         output='screen'
     )
 
+    joy_drive = Node(
+        package='joy',
+        executable='joy_node',
+        name='joy_node',
+        paramaters=[{'dev': '/dev/input/jso', 'deadzone': 0.05, 'autorepeat_rate': 20.0}]
+    )
+
+    joy_teleop = Node(
+            package='teleop_twist_joy',
+            executable='teleop_node',
+            name='joy_node',
+            parameters=['config/ps4_teleop.yaml']
+    )
+
     # Launch them all!
     return LaunchDescription([
     rsp,
@@ -90,5 +104,7 @@ def generate_launch_description():
     #controller_manager_node,
     load_joint_state_broadcaster,
     load_diff_drive_controller,
+    joy_drive,
+    joy_teleop,
     ])
 
