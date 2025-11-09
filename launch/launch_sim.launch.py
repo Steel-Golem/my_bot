@@ -78,6 +78,7 @@ def generate_launch_description():
         package='controller_manager',
         executable='spawner',
         arguments=['diff_drive_controller', '--controller-manager-timeout', '15'],
+        remappings=[('/cmd_vel', '/diff_drive_controller/cmd_vel_unstamped')],
         output='screen'
     )
 
