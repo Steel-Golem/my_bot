@@ -14,3 +14,7 @@ joy_node:
     # Optional: remap if needed
     # axes_mapping: [LX, LY, RX, RY, L2, R2, DPAD_X, DPAD_Y]
     # buttons_mapping: [Square, X, Circle, Triangle, L1, R1, L2, R2, Share, Options, L3, R3, PS, Touchpad]
+    axis_linear: 1
+    axis_angular: 0
+    scale_linear: 1.0
+    scale_angular: 1.2
