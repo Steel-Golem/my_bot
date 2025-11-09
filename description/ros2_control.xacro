@@ -2,11 +2,12 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 
-    <ros2_control name="GazeboSimSystem" type="system">
+    <ros2_control name="GazeboSystem" type="system">
       <hardware>
         <plugin>gz_ros2_control/GazeboSimSystem</plugin>
       </hardware>
 
+      
     <!-- Left wheel joint -->
     <joint name="left_wheel_joint">
       <command_interface name="velocity" min="-10.0" max="10.0"/>
@@ -22,8 +23,10 @@
     </joint>
   </ros2_control>
 
+
+  
   <gazebo>
-    <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin"> 
+    <plugin name="gz_ros2_control::GazeboSimROS2ControlPlugin" filename="gz_ros2_control-system">
       <parameters>$(find my_bot)/config/my_controllers.yaml</parameters>
     </plugin>
   </gazebo>
