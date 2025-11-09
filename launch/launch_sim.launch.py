@@ -41,15 +41,6 @@ def generate_launch_description():
                         output='screen')
 
     bridge = Node(package='ros_gz_bridge', executable='parameter_bridge',
-                  parameters=[
-                        {"bridge_names": ["clock_bridge"]},
-                        {"bridges.clock_bridge.ros_topic_name": "/clock"},
-                        {"bridges.clock_bridge.gz_topic_name": "/clock"},
-                        {"bridges.clock_bridge.ros_type_name": "rosgraph_msgs/msg/Clock"},
-                        {"bridges.clock_bridge.gz_type_name": "gz.msgs.Clock"},
-                        {"bridges.clock_bridge.direction": "GZ_TO_ROS"},
-                        {"bridges.clock_bridge.lazy": "False"},
-                        {"bridges.clock_bridge.qos_profile": "CLOCK"},],
                     arguments=[
                         '/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist',
                         '/odom@nav_msgs/msg/Odometry@gz.msgs.Odometry',
@@ -66,15 +57,15 @@ def generate_launch_description():
     robot_description_config = xacro.process_file(xacro_file).toxml()
 
     
- #   controller_manager_node = Node(
-#        package='controller_manager', 
- #       executable='ros2_control_node',
-  #      parameters=[
-   #                 {'robot_description': robot_description_config},
-    #                os.path.join(get_package_share_directory('my_bot'), 'config', 'my_controllers.yaml')
-#        ],
-  #      output='screen'
- #   )
+    controller_manager_node = Node(
+        package='controller_manager', 
+        executable='ros2_control_node',
+        parameters=[
+                    {'robot_description': robot_description_config},
+                    os.path.join(get_package_share_directory('my_bot'), 'config', 'my_controllers.yaml')
+        ],
+        output='screen'
+    )
     
     load_joint_state_broadcaster = Node(
         package='controller_manager',
@@ -96,7 +87,7 @@ def generate_launch_description():
     world_arg,
     spawn_entity,
     bridge,
-    #controller_manager_node,
+    controller_manager_node,
     load_joint_state_broadcaster,
     load_diff_drive_controller,
     ])
