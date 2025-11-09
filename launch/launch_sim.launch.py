@@ -92,7 +92,7 @@ def generate_launch_description():
             package='teleop_twist_joy',
             executable='teleop_node',
             name='joy_node',
-            parameters=['config/ps4_teleop.yaml']
+            parameters=[os.path.join('my_bot'), 'config', 'ps4_teleop.yaml']
     )
 
     # Launch them all!
