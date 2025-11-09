@@ -85,7 +85,7 @@ def generate_launch_description():
         package='joy',
         executable='joy_node',
         name='joy_node',
-        parameters=[{'dev': '/dev/input/jso', 'deadzone': 0.05, 'autorepeat_rate': 20.0}]
+        parameters=[{'dev': '/dev/input/js0', 'deadzone': 0.05, 'autorepeat_rate': 20.0}]
     )
 
     teleop_config = os.path.join(get_package_share_directory('my_bot'), 'config', 'ps4_teleop.yaml')
