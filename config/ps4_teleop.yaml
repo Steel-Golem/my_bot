@@ -1,5 +1,5 @@
 # ps4_joy.yaml
-joy_node:
+teleop_twist_joy_node:
   ros__parameters:
     axis_linear: 1
     axis_angular: 0
