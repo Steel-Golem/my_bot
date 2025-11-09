@@ -43,8 +43,9 @@ def generate_launch_description():
     bridge = Node(package='ros_gz_bridge', executable='parameter_bridge',
                     arguments=[
                         '/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist:ros2',
-                        '/odom@nav_msgs/msg/Odometry@gz.msgs.Odometry',
-                        '/clock@rosgraph_msgs/msg/Clock@gz.msgs.Clock'
+                        '/odom@gz.msgs.Odometry@nav_msgs/msg/Odometry:gz',
+                        '/clock@gz.msgs.Clock@rosgraph_msgs/msg/Clock:gz'
+
                     ],
                     output='screen')
 
