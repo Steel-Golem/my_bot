@@ -57,27 +57,27 @@ def generate_launch_description():
     robot_description_config = xacro.process_file(xacro_file).toxml()
 
     
-    controller_manager_node = Node(
-        package='controller_manager', 
-        executable='ros2_control_node',
-        parameters=[
-                    {'robot_description': robot_description_config},
-                    os.path.join(get_package_share_directory('my_bot'), 'config', 'my_controllers.yaml')
-        ],
-        output='screen'
-    )
+ #   controller_manager_node = Node(
+#        package='controller_manager', 
+ #       executable='ros2_control_node',
+  #      parameters=[
+   #                 {'robot_description': robot_description_config},
+    #                os.path.join(get_package_share_directory('my_bot'), 'config', 'my_controllers.yaml')
+#        ],
+  #      output='screen'
+ #   )
     
     load_joint_state_broadcaster = Node(
         package='controller_manager',
         executable='spawner',
-        arguments=['joint_state_broadcaster', '--controller-manager', '/controller_manager'],
+        arguments=['joint_state_broadcaster', '--controller-manager-timeout', '15'],
         output='screen'
     )
 
     load_diff_drive_controller = Node(
         package='controller_manager',
         executable='spawner',
-        arguments=['diff_drive_controller', '--controller-manager', '/controller_manager'],
+        arguments=['diff_drive_controller', '--controller-manager-timeout', '15'],
         output='screen'
     )
 
@@ -87,7 +87,8 @@ def generate_launch_description():
     world_arg,
     spawn_entity,
     bridge,
-    controller_manager_node,
-    TimerAction(period=3.0, actions=[load_joint_state_broadcaster]),
-    TimerAction(period=4.0, actions=[load_diff_drive_controller]),
+    #controller_manager_node,
+    load_joint_state_broadcaster,
+    load_diff_drive_controller,
     ])
+
