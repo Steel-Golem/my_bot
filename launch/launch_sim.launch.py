@@ -85,7 +85,7 @@ def generate_launch_description():
         package='joy',
         executable='joy_node',
         name='joy_node',
-        paramaters=[{'dev': '/dev/input/jso', 'deadzone': 0.05, 'autorepeat_rate': 20.0}]
+        parameters=[{'dev': '/dev/input/jso', 'deadzone': 0.05, 'autorepeat_rate': 20.0}]
     )
 
     joy_teleop = Node(
