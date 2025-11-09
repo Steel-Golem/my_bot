@@ -1,20 +1,9 @@
 # ps4_joy.yaml
 joy_node:
   ros__parameters:
-    # Device path for the PS4 controller
-    dev: "/dev/input/js0"
-
-    # Publish rate (Hz)
-    deadzone: 0.05
-
-    # Set the type of joystick (ps4 is typically mapped automatically)
-    autorepeat_rate: 20.0
-
-    # Button and axis mappings
-    # Optional: remap if needed
-    # axes_mapping: [LX, LY, RX, RY, L2, R2, DPAD_X, DPAD_Y]
-    # buttons_mapping: [Square, X, Circle, Triangle, L1, R1, L2, R2, Share, Options, L3, R3, PS, Touchpad]
     axis_linear: 1
     axis_angular: 0
     scale_linear: 1.0
     scale_angular: 1.2
+    enable_button: -1
+    enable_turbo_button: -1

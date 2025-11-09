@@ -88,11 +88,13 @@ def generate_launch_description():
         parameters=[{'dev': '/dev/input/jso', 'deadzone': 0.05, 'autorepeat_rate': 20.0}]
     )
 
+    teleop_config = os.path.join(get_package_share_directory('my_bot'), 'config', 'ps4_teleop.yaml')
+
     joy_teleop = Node(
             package='teleop_twist_joy',
             executable='teleop_node',
-            name='joy_node',
-            parameters=[os.path.join('my_bot'), 'config', 'ps4_teleop.yaml']
+            name='teleop_twist_joy_node',
+            parameters=[teleop_config]
     )
 
     # Launch them all!
