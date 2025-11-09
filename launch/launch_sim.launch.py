@@ -94,7 +94,8 @@ def generate_launch_description():
             package='teleop_twist_joy',
             executable='teleop_node',
             name='teleop_twist_joy_node',
-            parameters=[teleop_config]
+            parameters=[teleop_config],
+            output='screen'
     )
 
     # Launch them all!
