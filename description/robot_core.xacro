@@ -90,6 +90,28 @@
             </xacro:inertial_cylinder>
         </link>
 
+        <transmission name="left_wheel_trans">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="left_wheel_joint">
+                <hardwareInterface>velocity</hardwareInterface>
+            </joint>
+            <actuator name="left_wheel_motor">
+                <hardwareInterface>velocity</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+
+        <transmission name="right_wheel_trans">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="right_wheel_joint">
+                <hardwareInterface>velocity</hardwareInterface>
+            </joint>
+            <actuator name="right_wheel_motor">
+                <hardwareInterface>velocity</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+
     <!--castor wheel-->
         <joint name="caster_wheel_joint" type="fixed">
             <parent link="chassis"/>
