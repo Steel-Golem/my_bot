@@ -43,9 +43,8 @@ def generate_launch_description():
     bridge = Node(package='ros_gz_bridge', executable='parameter_bridge',
                     arguments=[
                         '/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist',
-                        '/odom@gz.msgs.Odometry@nav_msgs/msg/Odometry',
-                        '/clock@gz.msgs.Clock@rosgraph_msgs/msg/Clock'
-
+                        '/odom@nav_msgs/msg/Odometry@gz.msgs.Odometry',
+                        '/clock@rosgraph_msgs/msg/Clock@gz.msgs.Clock'
                     ],
                     output='screen')
 
@@ -79,7 +78,6 @@ def generate_launch_description():
         package='controller_manager',
         executable='spawner',
         arguments=['diff_drive_controller', '--controller-manager-timeout', '15'],
-        remappings=[('/cmd_vel', '/diff_drive_controller/cmd_vel_unstamped')],
         output='screen'
     )
 
