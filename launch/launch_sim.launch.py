@@ -81,21 +81,22 @@ def generate_launch_description():
         output='screen'
     )
 
-    joy_drive = Node(
-        package='joy',
-        executable='joy_node',
-        name='joy_node',
-        parameters=[{'dev': '/dev/input/js0', 'deadzone': 0.05, 'autorepeat_rate': 20.0}]
-    )
-
     teleop_config = os.path.join(get_package_share_directory('my_bot'), 'config', 'ps4_teleop.yaml')
 
-    joy_teleop = Node(
-            package='teleop_twist_joy',
-            executable='teleop_node',
-            name='teleop_twist_joy_node',
+    joy_node = Node(
+            package='joy',
+            executable='joy_node',
             parameters=[teleop_config],
             output='screen'
+    )
+
+    joy_teleop = Node(
+            package='teleop_tiwst_joy',
+            executable='teleop_node',
+            name='teleop_node', #may need to change to teleop_twist_joy_node
+            parameters=[teleop_config],
+            remappings=[('/cmd_vel','/diff_cont/cmd_vel_unstamped')],
+            output='screen',
     )
 
     # Launch them all!
@@ -107,7 +108,7 @@ def generate_launch_description():
     #controller_manager_node,
     load_joint_state_broadcaster,
     load_diff_drive_controller,
-    joy_drive,
+    joy_node,
     joy_teleop,
     ])
 

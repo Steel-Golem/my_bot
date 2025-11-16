@@ -1,9 +1,24 @@
-# ps4_joy.yaml
 joy_node:
   ros__parameters:
-    axis_linear: 1
-    axis_angular: 0
-    scale_linear: 1.0
-    scale_angular: 1.2
-    enable_button: -1
-    enable_turbo_button: -1
+    device_id: 0
+    deadzone: 0.05
+    autorepeat_rate: 20.0
+
+joy_teleop:
+  ros__parameters:
+    axis_linear:
+      x: 1
+    scale_linear:
+      x: 1.0
+    scale_linear_turbo:
+      x: 0.5
+    
+    axis_angular:
+      yaw: 0
+    scale_angular:
+      yaw: 1.0
+    scale_angular_turbo:
+      yaw: 0.5
+
+      enable_turbo_button: 7
+      require_enable_button: false
