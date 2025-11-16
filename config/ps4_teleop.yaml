@@ -4,7 +4,7 @@ joy_node:
     deadzone: 0.05
     autorepeat_rate: 20.0
 
-joy_teleop:
+teleop_twist_joy_node:
   ros__parameters:
     axis_linear:
       x: 1
@@ -20,6 +20,6 @@ joy_teleop:
     scale_angular_turbo:
       yaw: 0.5
 
-      enable_turbo_button: 7
-      enable_button: 6
-      require_enable_button: false
+    enable_turbo_button: 7
+    enable_button: 6
+    require_enable_button: false
