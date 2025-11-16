@@ -92,7 +92,7 @@ def generate_launch_description():
 
     joy_teleop = Node(
             package='teleop_twist_joy',
-            executable='teleop_node',
+            executable='teleop_twist_joy_node',
             name='teleop_twist_joy_node', #may need to change to teleop_twist_joy_node
             parameters=[teleop_config],
             output='screen',
@@ -101,13 +101,13 @@ def generate_launch_description():
     # Launch them all!
     return LaunchDescription([
     rsp,
+    load_joint_state_broadcaster,
+    load_diff_drive_controller,
+    joy_node,
     world_arg,
     spawn_entity,
     bridge,
     #controller_manager_node,
-    load_joint_state_broadcaster,
-    load_diff_drive_controller,
-    joy_node,
     joy_teleop,
     ])
 
