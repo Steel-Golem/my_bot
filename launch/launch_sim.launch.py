@@ -95,7 +95,6 @@ def generate_launch_description():
             executable='teleop_node',
             name='teleop_node', #may need to change to teleop_twist_joy_node
             parameters=[teleop_config],
-            remappings=[('/cmd_vel','/diff_cont/cmd_vel_unstamped')],
             output='screen',
     )
 
