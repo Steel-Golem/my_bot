@@ -91,7 +91,7 @@ def generate_launch_description():
     )
 
     joy_teleop = Node(
-            package='teleop_tiwst_joy',
+            package='teleop_twist_joy',
             executable='teleop_node',
             name='teleop_node', #may need to change to teleop_twist_joy_node
             parameters=[teleop_config],
