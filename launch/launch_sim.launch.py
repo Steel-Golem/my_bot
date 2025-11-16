@@ -92,7 +92,7 @@ def generate_launch_description():
 
     joy_teleop = Node(
             package='teleop_twist_joy',
-            executable='teleop_twist_joy_node',
+            executable='teleop_node',
             name='teleop_twist_joy_node', #may need to change to teleop_twist_joy_node
             parameters=[teleop_config],
             output='screen',
