@@ -71,7 +71,7 @@ def generate_launch_description():
     )
 
     #teleop_config = os.path.join(get_package_share_directory('my_bot'), 'config', 'ps4_teleop.yaml')
-
+    '''
     joy_node = Node(
             package='joy',
             executable='joy_node',
@@ -86,7 +86,7 @@ def generate_launch_description():
             parameters=[teleop_config],
             output='screen',
     )
-
+    '''
     # Launch them all!
     return LaunchDescription([
     rsp,
