@@ -49,12 +49,12 @@ def generate_launch_description():
                     output='screen')
 
 
-    xacro_file = os.path.join(
-                    get_package_share_directory('my_bot'),
-                    'description',
-                    'robot.urdf.xacro'
-                    )
-    robot_description_config = xacro.process_file(xacro_file).toxml()
+    #xacro_file = os.path.join(
+    #                get_package_share_directory('my_bot'),
+      #              'description',
+     #               'robot.urdf.xacro'
+      #              )
+  #  robot_description_config = xacro.process_file(xacro_file).toxml()
 
     load_joint_state_broadcaster = Node(
         package='controller_manager',
@@ -70,7 +70,7 @@ def generate_launch_description():
         output='screen'
     )
 
-    teleop_config = os.path.join(get_package_share_directory('my_bot'), 'config', 'ps4_teleop.yaml')
+    #teleop_config = os.path.join(get_package_share_directory('my_bot'), 'config', 'ps4_teleop.yaml')
 
     joy_node = Node(
             package='joy',
