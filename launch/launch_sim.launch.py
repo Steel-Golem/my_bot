@@ -90,8 +90,8 @@ def generate_launch_description():
     # Launch them all!
     return LaunchDescription([
     rsp,
-    load_joint_state_broadcaster,
-    load_diff_drive_controller,
+    #load_joint_state_broadcaster,
+    #load_diff_drive_controller,
     #joy_node,
     world_arg,
     spawn_entity,
