@@ -29,7 +29,7 @@ def generate_launch_description():
 
     world_arg = DeclareLaunchArgument(
         'world',
-        default_value="empty.sdf",
+        default_value="empty.world",
         description='World to load'
         )
 

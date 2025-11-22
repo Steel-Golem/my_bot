@@ -37,7 +37,7 @@ def generate_launch_description():
             os.path.join(gz_pkg, 'launch', 'gz_sim.launch.py')
         ),
         launch_arguments={
-            'gz_args': os.path.join(pkg_path, 'worlds', 'empty.sdf')
+            'gz_args': os.path.join(pkg_path, 'worlds', 'empty.world')
         }.items(),
     )
 
