@@ -21,8 +21,8 @@ diff_drive_controller:
     use_stamped_vel: false
     base_frame_id: base_link
 
-    left_wheel_names: ['left_wheel_joint']
-    right_wheel_names: ['right_wheel_joint']
+    left_wheel_names:  ['Revolute 13', 'Revolute 14', 'Revolute 15']
+    right_wheel_names: ['Revolute 10', 'Revolute 11', 'Revolute 12']
 
     wheel_separation: 0.35
     wheel_radius: 0.05

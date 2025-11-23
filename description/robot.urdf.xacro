@@ -356,28 +356,28 @@
 <joint name="Revolute 6" type="continuous">
   <origin xyz="0.186039 -0.110927 0.194654" rpy="0 0 0"/>
   <parent link="Bogie3_1"/>
-  <child link="Bar1_2"/>
+  <child link="Bar1_1"/>
   <axis xyz="0.699606 -0.64133 0.315035"/>
 </joint>
 <!-- one of these two may need to swicth-->
 <joint name="Revolute 7" type="continuous">
   <origin xyz="0.236664 0.188148 -0.011824" rpy="0 0 0"/>
   <parent link="Diff1_1"/>
-  <child link="Bar1_1"/>
+  <child link="Bar1_2"/>
   <axis xyz="0.626432 -0.731916 -0.268109"/>
 </joint>
 
 <joint name="Revolute 8" type="continuous">
   <origin xyz="0.125165 -0.12932 0.102633" rpy="0 0 0"/>
   <parent link="Bogie1_1"/>
-  <child link="Bar2_2"/>
+  <child link="Bar2_1"/>
   <axis xyz="0.005692 -0.280968 -0.9597"/>
 </joint>
 <!-- one of these two may need to swicth-->
 <joint name="Revolute 9" type="continuous">
   <origin xyz="-0.21948 -0.208225 0.00447" rpy="0 0 0"/>
   <parent link="Diff1_1"/>
-  <child link="Bar2_1"/>
+  <child link="Bar2_2"/>
   <axis xyz="0.626432 -0.731916 -0.268109"/>
 </joint>
 
